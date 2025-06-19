@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>João Kirst - Portfólio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@0.441.0/dist/umd/lucide.min.js" defer></script>
+    <style>
+        body.dark {
+            background-color: #1f2937;
+            color: #e5e7eb;
+        }
+        body.dark .bg-gray-50 { background-color: #374151; }
+        body.dark .bg-white { background-color: #1f2937; }
+        body.dark .bg-gray-100 { background-color: #4b5563; }
+        body.dark .hover\:bg-gray-200:hover { background-color: #6b7280; }
+        body.dark .carousel-item { background-color: #4b5563; }
+        body.dark .mobile-menu { background-color: #374151; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .accordion-content.open { max-height: 500px; }
+        .carousel-container { overflow: hidden; position: relative; }
+        .carousel-track { display: flex; gap: 12px; transition: transform 0.5s ease-in-out; }
+        .carousel-item { flex: 0 0 auto; width: 100px; min-width: 100px; }
+        .carousel-item img { width: 100%; height: 60px; object-fit: contain; }
+        @media (min-width: 480px) { .carousel-item { width: 120px; } }
+        @media (min-width: 640px) { .carousel-item { width: 140px; } }
+        @media (min-width: 768px) { .carousel-item { width: 160px; } }
+        @media (min-width: 1024px) { .carousel-item { width: 180px; } }
+        .accordion-item button { padding: 12px 16px; font-size: 0.9rem; }
+        .accordion-content { padding: 12px 16px; font-size: 0.85rem; }
+        @media (min-width: 640px) {
+            .accordion-item button { padding: 16px 20px; font-size: 1rem; }
+            .accordion-content { padding: 16px 20px; font-size: 0.95rem; }
+        }
+        header .text-2xl { font-size: 1.25rem; }
+        @media (min-width: 640px) { header .text-2xl { font-size: 1.5rem; } }
+        section h2 { font-size: 1.5rem; }
+        @media (min-width: 640px) { section h2 { font-size: 2rem; } }
+        #theme-toggle { padding: 12px; }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100%;
+            background-color: #fff;
+            transition: right 0.3s ease-in-out;
+            z-index: 1000;
+            padding: 1rem;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .mobile-menu.open { right: 0; }
+        .mobile-menu ul { flex-direction: column; gap: 1.5rem; padding-top: 2rem; }
+        .mobile-menu li a { font-size: 1.2rem; color: #1f2937; }
+        body.dark .mobile-menu li a { color: #e5e7eb; }
+        .mobile-menu .close-btn { position: absolute; top: 1rem; right: 1rem; }
+        .hamburger-btn { display: block; }
+        @media (min-width: 640px) {
+            .hamburger-btn { display: none; }
+            .mobile-menu { display: none; }
+            nav ul { flex-direction: row; gap: 16px; }
+            nav ul li a { font-size: 0.875rem; }
+        }
+        .typing-cursor::after {
+            content: "|";
+            animation: blink 0.7s step-end infinite;
+        }
+        .typed.typing-cursor::after {
+            content: "";
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="font-inter text-gray-800 transition-colors duration-300">
+    <!-- Cabeçalho -->
+    <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 sticky top-0 shadow-lg z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">João Kirst</h1>
+            <nav class="flex items-center space-x-4">
+                <!-- Menu Desktop -->
+                <ul class="hidden sm:flex space-x-4 text-sm">
+                    <li><a href="#about" class="hover:text-yellow-300 transition duration-200">Sobre</a></li>
+                    <li><a href="#experience" class="hover:text-yellow-300 transition duration-200">Experiência</a></li>
+                    <li><a href="#skills" class="hover:text-yellow-300 transition duration-200">Habilidades</a></li>
+                    <!--<li><a href="#projects" class="hover:text-yellow-300 transition duration-200">Projetos</a></li>-->
+                    <li><a href="#contact" class="hover:text-yellow-300 transition duration-200">Contato</a></li>
+                </ul>
+                <!-- Botão Hamburguer -->
+                <button id="hamburger-btn" class="hamburger-btn sm:hidden p-2 rounded-full hover:bg-blue-700">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-blue-700">
+                    <i data-lucide="moon" class="w-5 h-5"></i>
+                </button>
+            </nav>
+            <!-- Menu Mobile -->
+            <div id="mobile-menu" class="mobile-menu">
+                <button id="close-menu" class="close-btn p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                <ul class="flex flex-col">
+                    <li><a href="#about" class="hover:text-yellow-300 transition duration-200 block py-2">Sobre</a></li>
+                    <li><a href="#experience" class="hover:text-yellow-300 transition duration-200 block py-2">Experiência</a></li>
+                    <li><a href="#skills" class="hover:text-yellow-300 transition duration-200 block py-2">Habilidades</a></li>
+                    <!--<li><a href="#projects" class="hover:text-yellow-300 transition duration-200 block py-2">Projetos</a></li>-->
+                    <li><a href="#contact" class="hover:text-yellow-300 transition duration-200 block py-2">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sobre -->
+    <section id="about" class="py-16 bg-gray-50" data-aos="fade-up">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center" id="typing-title"></h2>
+            <p class="text-lg text-center max-w-2xl mx-auto" id="typing-text"></p>
+        </div>
+    </section>
+
+    <!-- Experiência Profissional (Sanfona) -->
+    <section id="experience" class="py-16 bg-white" data-aos="fade-up">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">Experiência Profissional</h2>
+            <div class="space-y-4">
+                <div class="accordion-item">
+                    <button class="w-full text-left bg-gray-100 p-4 sm:p-5 rounded-lg shadow-lg hover:bg-blue-50 transition duration-300 flex justify-between items-center">
+                        <span class="text-base sm:text-lg font-semibold">Tectron - Programador</span>
+                        <i data-lucide="chevron-down" class="w-6 h-6 transform transition-transform duration-300 accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content p-4 sm:p-5 bg-gray-50 rounded-b-lg">
+                        <p><strong>Período:</strong> Dezembro 2024 - Presente</p>
+                        <p><strong>Modalidade:</strong> Presencial</p>
+                        <p><strong>Responsabilidades:</strong></p>
+                        <ul class="list-disc ml-6">
+                            <li> Javscript: Projeto: Telas para Coletor de Dados
+Desenvolvi um conjunto de telas responsivas utilizando o template AdminLTE, adaptadas para coletores industriais usados em operações logísticas. As interfaces foram otimizadas para navegação simplificada, leitura rápida de informações e integração com sistemas WMS.</li>
+                            <li>Fluig: Criação de Fluxos no Fluig (Totvs) para Áreas Corporativas
+Atuei na modelagem e desenvolvimento de fluxos de processos utilizando a plataforma Fluig, com foco nas áreas de Recursos Humanos, Jurídico, Financeiro e demais setores da empresa. Os fluxos foram criados com regras de negócio customizadas, formulários inteligentes e integrações com sistemas internos.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="w-full text-left bg-gray-100 p-4 sm:p-5 rounded-lg shadow-lg hover:bg-blue-50 transition duration-300 flex justify-between items-center">
+                        <span class="text-base sm:text-lg font-semibold">Agência Tângelo - Desenvolvedor Web Front-End</span>
+                        <i data-lucide="chevron-down" class="w-6 h-6 transform transition-transform duration-300 accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content p-4 sm:p-5 bg-gray-50 rounded-b-lg">
+                        <p><strong>Período:</strong> Novembro 2020 - Novembro 2024</p>
+                        <p><strong>Modalidade:</strong> Presencial</p>
+                        <p><strong>Desenvolvimento Web:</strong></p>
+                        <ul class="list-disc ml-6">
+                            <li><strong>Linguagens de Programação:</strong> PHP 7.0</li>
+                            <li><strong>Front-end:</strong> JavaScript, jQuery, HTML, CSS</li>
+                            <li><strong>Banco de Dados:</strong> SQL</li>
+                        </ul>
+                        <p><strong>Experiência:</strong> Desenvolvimento bem-sucedido de uma variedade de sites utilizando PHP 7.0, JavaScript, jQuery, HTML, CSS e SQL para criar soluções eficientes e responsivas.</p>
+                        <p><strong>Alinhamento Estratégico de Conteúdo:</strong></p>
+                        <ul class="list-disc ml-6">
+                            <li>Demonstra capacidade na criação e atualização estratégica de conteúdo para sites, assegurando relevância e impacto.</li>
+                        </ul>
+                        <p><strong>Atendimento Personalizado:</strong></p>
+                        <ul class="list-disc ml-6">
+                            <li>Oferecimento de treinamento personalizado a clientes, com foco na resolução de dúvidas específicas sobre o funcionamento do site.</li>
+                        </ul>
+                        <p><strong>Suporte Técnico Contínuo:</strong></p>
+                        <ul class="list-disc ml-6">
+                            <li>Prestações de suporte técnico contínuo para garantir a confiança e autonomia dos clientes na administração de seus sites.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="w-full text-left bg-gray-100 p-4 sm:p-5 rounded-lg shadow-lg hover:bg-blue-50 transition duration-300 flex justify-between items-center">
+                        <span class="text-base sm:text-lg font-semibold">Centro Universitário FAG - Analista de Suporte Técnico</span>
+                        <i data-lucide="chevron-down" class="w-6 h-6 transform transition-transform duration-300 accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content p-4 sm:p-5 bg-gray-50 rounded-b-lg">
+                        <p><strong>Período:</strong> Fevereiro 2018 - Dezembro 2020</p>
+                        <p><strong>Local:</strong> Toledo, Paraná</p>
+                        <p><strong>Experiência:</strong></p>
+                        <ul class="list-disc ml-6">
+                            <li>Em 2019, comecei a trabalhar com PHP ao criar um sistema para arrecadação de alimentos durante um trote solidário. Analisei a turma e destaquei o aluno mais engajado na arrecadação. Essa experiência foi fundamental para desenvolver minhas habilidades em PHP e reforçou meu interesse em projetos com impacto social.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="w-full text-left bg-gray-100 p-4 sm:p-5 rounded-lg shadow-lg hover:bg-blue-50 transition duration-300 flex justify-between items-center">
+                        <span class="text-base sm:text-lg font-semibold">Prime Agro Produtos Agrícolas Ltda - Analista de TI</span>
+                        <i data-lucide="chevron-down" class="w-6 h-6 transform transition-transform duration-300 accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content p-4 sm:p-5 bg-gray-50 rounded-b-lg">
+                        <p><strong>Período:</strong> Agosto 2016 - Dezembro 2017</p>
+                        <p><strong>Local:</strong> Toledo, Paraná</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Habilidades (Carrossel) -->
+    <section id="skills" class="py-16 bg-gray-50" data-aos="fade-up">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">Habilidades</h2>
+            <div class="relative carousel-container">
+                <div class="carousel-track flex">
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="100">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/java/java-original.svg" alt="Java Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">Java</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="200">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/spring/spring-original.svg" alt="Spring Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">Spring</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="300">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/angularjs/angularjs-original.svg" alt="Angular Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">Angular</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="400">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/flutter/flutter-original.svg" alt="Flutter Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">Flutter</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="500">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/dart/dart-original.svg" alt="Dart Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">Dart</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="600">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/html5/html5-original.svg" alt="HTML Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">HTML</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="700">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/css3/css3-original.svg" alt="CSS Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">CSS</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="800">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/javascript/javascript-original.svg" alt="JavaScript Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">JavaScript</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="900">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/typescript/typescript-original.svg" alt="TypeScript Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">TypeScript</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="1000">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/mysql/mysql-original.svg" alt="SQL Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">SQL</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="1100">
+                        <img src="https://example.com/fluig-logo.png" alt="Fluig Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">Fluig</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="1200">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/git/git-original.svg" alt="Git Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">Git</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="1300">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/react/react-original.svg" alt="React Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">React</p>
+                    </div>
+                    <div class="carousel-item bg-gray-100 rounded-lg shadow-md hover:scale-105 transition duration-300 p-4" data-aos="zoom-in" data-aos-delay="1400">
+                        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/php/php-original.svg" alt="PHP Logo" class="w-full h-20 object-contain">
+                        <p class="text-center mt-2 font-semibold">PHP</p>
+                    </div>
+                </div>
+                <button id="prev-btn" class="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50" disabled>
+                    <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                </button>
+                <button id="next-btn" class="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700">
+                    <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projetos -->
+    <!--<section id="projects" class="py-16 bg-white" data-aos="fade-up">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">Projetos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg hover:scale-105 transition duration-300">
+                    <h3 class="text-xl font-semibold mb-2">Sistema de Automação de Processos</h3>
+                    <p class="mb-4">Desenvolvimento de fluxos de trabalho personalizados para empresas usando TOTVS Fluig.</p>
+                    <a href="#" class="text-blue-600 hover:underline">Ver Projeto</a>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg hover:scale-105 transition duration-300">
+                    <h3 class="text-xl font-semibold mb-2">Aplicativo Mobile Corporativo</h3>
+                    <p class="mb-4">App para gestão de tarefas com integração a sistemas legados, desenvolvido com Flutter.</p>
+                    <a href="#" class="text-blue-600 hover:underline">Ver Projeto</a>
+                </div>
+            </div>
+        </div>
+    </section>-->
+
+    <!-- Contato -->
+    <section id="contact" class="py-16 bg-gray-50" data-aos="fade-up">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">Contato</h2>
+            <p class="text-lg text-center mb-6">Gostaria de colaborar ou saber mais? Entre em contato!</p>
+            <div class="flex justify-center space-x-6">
+                <a href="mailto:joaoalekirst@gmail.com" class="text-blue-600 hover:text-blue-800 transition duration-200"><i data-lucide="mail" class="w-6 h-6 inline-block mr-1"></i>E-mail</a>
+                <a href="https://github.com/joaokirst" target="_blank" class="text-blue-600 hover:text-blue-800 transition duration-200"><i data-lucide="github" class="w-6 h-6 inline-block mr-1"></i>GitHub</a>
+                <a href="https://www.linkedin.com/in/joaokirst/" target="_blank" class="text-blue-600 hover:text-blue-800 transition duration-200"><i data-lucide="linkedin" class="w-6 h-6 inline-block mr-1"></i>LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4">
+        <div class="container mx-auto text-center">
+            <p>© 2025 João Kirst. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="scroll-top" class="fixed bottom-4 right-4 p-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition duration-300 hidden">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Garantir que o DOM esteja carregado antes de executar os scripts
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializar AOS
+            AOS.init({ duration: 800, once: true });
+
+            // Inicializar Lucide Icons com verificação
+            function initializeLucide() {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                } else {
+                    console.warn('Lucide não foi carregado. Tentando novamente em 1 segundo...');
+                    setTimeout(initializeLucide, 1000); // Tenta novamente após 1 segundo
+                }
+            }
+            initializeLucide();
+
+            // Rolagem suave
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Fechar menu mobile ao clicar em um link
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu && mobileMenu.classList.contains('open')) {
+                        mobileMenu.classList.remove('open');
+                    }
+                });
+            });
+
+            // Funcionalidade da sanfona
+            document.querySelectorAll('.accordion-item button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.accordion-icon');
+                    
+                    content.classList.toggle('open');
+                    icon.classList.toggle('rotate-180');
+                    
+                    document.querySelectorAll('.accordion-item').forEach(item => {
+                        if (item !== button.parentElement) {
+                            item.querySelector('.accordion-content').classList.remove('open');
+                            item.querySelector('.accordion-icon').classList.remove('rotate-180');
+                        }
+                    });
+                });
+            });
+
+            // Tema escuro/claro
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                body.classList.toggle('dark', savedTheme === 'dark');
+                themeToggle.innerHTML = savedTheme === 'dark' ? '<i data-lucide="sun" class="w-5 h-5"></i>' : '<i data-lucide="moon" class="w-5 h-5"></i>';
+            }
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark');
+                const isDark = body.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                themeToggle.innerHTML = isDark ? '<i data-lucide="sun" class="w-5 h-5"></i>' : '<i data-lucide="moon" class="w-5 h-5"></i>';
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons(); // Re-renderiza ícones após mudar tema
+                }
+            });
+
+            // Botão Voltar ao Topo
+            const scrollTopBtn = document.getElementById('scroll-top');
+            window.addEventListener('scroll', () => {
+                if (scrollTopBtn) {
+                    scrollTopBtn.classList.toggle('hidden', window.scrollY < 300);
+                }
+            });
+            if (scrollTopBtn) {
+                scrollTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Funcionalidade do carrossel
+            const track = document.querySelector('.carousel-track');
+            const items = document.querySelectorAll('.carousel-item');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            let currentIndex = 0;
+
+            function getItemWidth() {
+                return items[0].offsetWidth + 12;
+            }
+
+            function updateCarousel() {
+                const itemWidth = getItemWidth();
+                const translateX = -currentIndex * itemWidth;
+                track.style.transform = `translateX(${translateX}px)`;
+                if (prevBtn) prevBtn.disabled = currentIndex === 0;
+                if (nextBtn) nextBtn.disabled = false;
+            }
+
+            function getVisibleItems() {
+                if (window.innerWidth >= 1024) return 5;
+                if (window.innerWidth >= 768) return 3;
+                if (window.innerWidth >= 480) return 2;
+                return 1;
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    if (currentIndex < items.length - getVisibleItems()) {
+                        currentIndex++;
+                    } else {
+                        currentIndex = 0;
+                    }
+                    updateCarousel();
+                });
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                    } else {
+                        currentIndex = items.length - getVisibleItems();
+                    }
+                    updateCarousel();
+                });
+            }
+
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            if (track) {
+                track.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+
+                track.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    if (touchStartX - touchEndX > 50) {
+                        if (currentIndex < items.length - getVisibleItems()) {
+                            currentIndex++;
+                        } else {
+                            currentIndex = 0;
+                        }
+                        updateCarousel();
+                    }
+                    if (touchEndX - touchStartX > 50) {
+                        if (currentIndex > 0) {
+                            currentIndex--;
+                        } else {
+                            currentIndex = items.length - getVisibleItems();
+                        }
+                        updateCarousel();
+                    }
+                });
+            }
+
+            window.addEventListener('resize', () => {
+                currentIndex = Math.min(currentIndex, Math.max(0, items.length - getVisibleItems()));
+                updateCarousel();
+            });
+
+            updateCarousel();
+
+            // Funcionalidade do Menu Hamburguer
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenuBtn = document.getElementById('close-menu');
+
+            if (hamburgerBtn && mobileMenu && closeMenuBtn) {
+                hamburgerBtn.addEventListener('click', () => {
+                    mobileMenu.classList.add('open');
+                });
+
+                closeMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                });
+            }
+
+            // Efeito de digitação
+            const typingTitle = document.getElementById('typing-title');
+            const typingText = document.getElementById('typing-text');
+            const titleText = "Sobre Mim";
+            const descriptionText = "Meu nome é João Alexandre Kirst Poltronieri. Sou formado em Análise e Desenvolvimento de Sistemas pela Universidade Paranaense (UNIPAR) em 2015 e possuo uma especialização lato sensu em Sistemas Móveis e Sistemas para Internet, concluída em 2022 pela mesma instituição. Com mais de uma década de experiência na área de tecnologia, destaco minha atuação em suporte e manutenção de sistemas, incluindo computadores e redes, com habilidades avançadas em resolução de problemas de hardware e software, além de configuração de equipamentos. Desde 2020, me dedico ao desenvolvimento web, utilizando PHP e JavaScript para criar soluções completas, abrangendo tanto o back-end quanto o front-end. Estou sempre buscando aprimoramento e acompanhando as tendências do mercado para oferecer o melhor em meus projetos.";
+            let titleIndex = 0;
+            let textIndex = 0;
+            let isTypingTitle = true;
+
+            function typeWriter() {
+                if (isTypingTitle) {
+                    if (titleIndex < titleText.length) {
+                        typingTitle.textContent += titleText.charAt(titleIndex);
+                        titleIndex++;
+                        setTimeout(typeWriter, 50); // Velocidade de digitação (100ms por caractere)
+                    } else {
+                        isTypingTitle = false;
+                        setTimeout(typeWriter, 50); // Pausa antes de começar o texto
+                    }
+                } else {
+                    if (textIndex < descriptionText.length) {
+                        typingText.textContent += descriptionText.charAt(textIndex);
+                        textIndex++;
+                        setTimeout(typeWriter, 10); // Velocidade mais rápida para o texto (50ms)
+                    } else {
+                        typingText.classList.add('typed'); // Remove o cursor após terminar
+                    }
+                }
+            }
+
+            // Estilo do cursor
+            typingTitle.classList.add('typing-cursor');
+            typingText.classList.add('typing-cursor');
+
+            // Iniciar o efeito
+            typeWriter();
+        });
+    </script>
+</body>
+</html>
